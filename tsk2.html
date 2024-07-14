@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Temperature Converter</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 500px;
+            margin: 0 auto;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #222;
+            color: #fff;
+        }
+
+        .result {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Temperature Converter</h1>
+
+        <input type="number" id="input-temperature" placeholder="Enter a temperature">
+
+        <select id="input-unit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <select id="output-unit">
+            <option value="celsius">Celsius</option>
+            <option value="fahrenheit">Fahrenheit</option>
+            <option value="kelvin">Kelvin</option>
+        </select>
+
+        <button id="convert-button">Convert</button>
+
+        <p class="result"></p>
+    </div>
+
+    <script>
+        const inputTemperature = document.getElementById('input-temperature');
+        const inputUnit = document.getElementById('input-unit');
+        const outputUnit = document.getElementById('output-unit');
+        const convertButton = document.getElementById('convert-button');
+        const result = document.querySelector('.result');
+
+        convertButton.addEventListener('click', function () {
+            const temperature = inputTemperature.value;
+            const inputUnitValue = inputUnit.value;
+            const outputUnitValue = outputUnit.value;
+
+            let convertedTemperature;
+
+            switch (inputUnitValue) {
+                case 'celsius':
+                    if (outputUnitValue === 'fahrenheit') {
+                        convertedTemperature = temperature * 9 / 5 + 32;
+                    } else if (outputUnitValue === 'kelvin') {
+                        convertedTemperature = temperature + 273.15;
+                    }
+                    break;
+
+                case 'fahrenheit':
+                    if (outputUnitValue === 'celsius') {
+                        convertedTemperature = (temperature - 32) * 5 / 9;
+                    } else if (outputUnitValue === 'kelvin') {
+                        convertedTemperature = (temperature - 32) * 5 / 9 + 273.15;
+                    }
+                    break;
+
+                case 'kelvin':
+                    if (outputUnitValue === 'celsius') {
+                        convertedTemperature = temperature - 273.15;
+                    } else if (outputUnitValue === 'fahrenheit') {
+                        convertedTemperature = (temperature - 273.15) * 9 / 5 + 32;
+                    }
+                    break;
+            }
+
+            result.innerText = `${temperature} ${inputUnitValue} is equal to ${convertedTemperature} ${outputUnitValue}.`;
+        });
+    </script>
+</body>
+
+</html>
